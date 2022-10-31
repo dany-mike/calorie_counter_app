@@ -1,18 +1,33 @@
-// const request = require("supertest");
-// const app = require("../src/app");
+const app = require("../src/app");
+
+const client = supertest(require("../src/app.js"));
+
+const multiply = require("../src/helpers/math");
 
 describe("Test the food", () => {
-  const food = {
+  const givenfood = {
     name: "apple",
     calories: 52,
     servingSize: "1 medium",
-    numberOfServings: 1,
+    numberOfServings: 2,
   };
 
-  test("One apple should be added in the user total calories", (done) => {
-    const dailyTotal = 40
-    const foodCalories = multiply(food.calories, food.numberOfServings)
+  const expectedResponse = {
+    totalCalories: 104,
+  };
+
+  test("The apple calories should be added in a given day total calories", (done) => {
+    const givenDayTotalCalories = 40;
+    const foodCalories = multiply(food.calories, food.numberOfServings);
     expect(foodCalories).toBe(52);
-    expect(addDailyTotalCalories(foodCalories, dailyTotal)).toBe(92)
+    expect(addDailyTotalCalories(foodCalories, givenDayTotalCalories)).toBe(
+      132
+    );
+  });
+
+  test("Call POST /food and return the given day total calories", async (done) => {
+    const response = await client.post("/food").send(givenfood);
+    expect(response.status).toBe(201);
+    expect(response.text).toEqual(JSON.stringify(expectedResponse));
   });
 });
