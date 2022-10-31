@@ -1,3 +1,3 @@
 module.exports = {
-  get: async (req, res) => res.send("Hello World!"),
+  get: async (req, res) => res.json({ hello: "Hello World!" }),
 };
