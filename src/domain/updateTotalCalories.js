@@ -1,5 +1,5 @@
-const updateTotalCalories = (caloriesToAdd, currentCaloriesAmount) => {
-  return (currentCaloriesAmount += caloriesToAdd);
+const updateTotalCalories = (caloriesToAdd, caloriesAmount) => {
+  return (caloriesAmount += caloriesToAdd);
 };
 
 module.exports = updateTotalCalories;

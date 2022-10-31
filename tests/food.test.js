@@ -13,22 +13,20 @@ describe("Test the food", () => {
   };
 
   const expectedResponse = {
-    totalCalories: 132,
+    updatedTotalCalories: 132,
   };
 
   test("The apple calories should be added in a given day total calories", () => {
-    const givenDayTotalCalories = 28;
+    const totalCalories = 28;
     const foodCalories = multiply(
       givenfood.calories,
       givenfood.numberOfServings
     );
     expect(foodCalories).toEqual(104);
-    expect(updateTotalCalories(foodCalories, givenDayTotalCalories)).toEqual(
-      132
-    );
+    expect(updateTotalCalories(foodCalories, totalCalories)).toEqual(132);
   });
 
-  test("Call POST /food and return the given day total calories", async () => {
+  test("Call POST /food and return the updated total calories", async () => {
     const response = await client.post("/food").send(givenfood);
     expect(response.status).toBe(201);
     expect(response.text).toEqual(JSON.stringify(expectedResponse));

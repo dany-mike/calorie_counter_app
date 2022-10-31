@@ -3,18 +3,15 @@ const multiply = require("../helpers/math");
 
 module.exports = {
   post: async (req, res) => {
-    const currentCaloriesAmount = 28;
+    const caloriesAmount = 28;
 
     const caloriesToAdd = multiply(
       req.body.calories,
       req.body.numberOfServings
     );
 
-    const totalCalories = updateTotalCalories(
-      caloriesToAdd,
-      currentCaloriesAmount
-    );
+    const updatedTotalCalories = updateTotalCalories(caloriesToAdd, caloriesAmount);
 
-    res.status(201).json({ totalCalories });
+    res.status(201).json({ updatedTotalCalories });
   },
 };
