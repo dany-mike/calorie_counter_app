@@ -1,4 +1,4 @@
-const app = require("../src/app");
+const supertest = require("supertest");
 
 const client = supertest(require("../src/app.js"));
 
@@ -16,7 +16,7 @@ describe("Test the food", () => {
     totalCalories: 104,
   };
 
-  test("The apple calories should be added in a given day total calories", (done) => {
+  test("The apple calories should be added in a given day total calories", () => {
     const givenDayTotalCalories = 40;
     const foodCalories = multiply(food.calories, food.numberOfServings);
     expect(foodCalories).toBe(52);
@@ -25,7 +25,7 @@ describe("Test the food", () => {
     );
   });
 
-  test("Call POST /food and return the given day total calories", async (done) => {
+  test("Call POST /food and return the given day total calories", async () => {
     const response = await client.post("/food").send(givenfood);
     expect(response.status).toBe(201);
     expect(response.text).toEqual(JSON.stringify(expectedResponse));
