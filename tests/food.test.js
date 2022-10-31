@@ -1,5 +1,5 @@
 const supertest = require("supertest");
-
+const updateTotalCalories = require("../src/domain/updateTotalCalories.js");
 const client = supertest(require("../src/app.js"));
 
 const multiply = require("../src/helpers/math");
@@ -13,14 +13,17 @@ describe("Test the food", () => {
   };
 
   const expectedResponse = {
-    totalCalories: 104,
+    totalCalories: 132,
   };
 
   test("The apple calories should be added in a given day total calories", () => {
-    const givenDayTotalCalories = 40;
-    const foodCalories = multiply(food.calories, food.numberOfServings);
-    expect(foodCalories).toBe(52);
-    expect(addDailyTotalCalories(foodCalories, givenDayTotalCalories)).toBe(
+    const givenDayTotalCalories = 28;
+    const foodCalories = multiply(
+      givenfood.calories,
+      givenfood.numberOfServings
+    );
+    expect(foodCalories).toEqual(104);
+    expect(updateTotalCalories(foodCalories, givenDayTotalCalories)).toEqual(
       132
     );
   });
