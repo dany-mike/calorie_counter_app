@@ -4,7 +4,7 @@ const client = supertest(require("../src/app.js"));
 
 const multiply = require("../src/helpers/math");
 
-describe("Test the food", () => {
+describe("Test to add a food in the calorie counter", () => {
   const givenfood = {
     name: "apple",
     calories: 52,
